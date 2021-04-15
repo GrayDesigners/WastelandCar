@@ -1,26 +1,36 @@
 {
-	"FileVersion": 3,
-	"EngineAssociation": "4.26",
-	"Category": "",
-	"Description": "",
-	"Plugins": [
-		{
-			"Name": "PhysXVehicles",
-			"Enabled": true
-		},
-		{
-			"Name": "RawInput",
-			"Enabled": true
-		},
-		{
-			"Name": "VehicleSystemPlugin",
-			"Enabled": false,
-			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/9577489aa3264ecf94142dad1bc2956c"
-		},
-		{
-			"Name": "EasyBallistics",
-			"Enabled": false,
-			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/bbecde0f66914263b57fd2af5a0c7ffe"
-		}
-	]
+  "FileVersion": 3,
+  "EngineAssociation": "4.26",
+  "Category": "",
+  "Description": "",
+  "Modules": [
+    {
+      "Name": "WastelandCar",
+      "Type": "Runtime",
+      "LoadingPhase": "Default",
+      "AdditionalDependencies": [
+        "PhysXVehicles"
+      ]
+    }
+  ],
+  "Plugins": [
+    {
+      "Name": "PhysXVehicles",
+      "Enabled": true
+    },
+    {
+      "Name": "RawInput",
+      "Enabled": true
+    },
+    {
+      "Name": "VehicleSystemPlugin",
+      "Enabled": false,
+      "MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/9577489aa3264ecf94142dad1bc2956c"
+    },
+    {
+      "Name": "EasyBallistics",
+      "Enabled": false,
+      "MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/bbecde0f66914263b57fd2af5a0c7ffe"
+    }
+  ]
 }
