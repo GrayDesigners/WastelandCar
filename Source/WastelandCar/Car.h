@@ -32,6 +32,9 @@ public:
 	void OnHandbrakePressed();
 	void OnHandbrakeReleased();
 
+	/*Shooting*/
+	void Fire();
+
 	/*In air physics*/
 	void UpdateInAirControl(float DeltaTime);
 
@@ -42,4 +45,11 @@ public:
 	/*Camera that will be our viewpoint*/
 	UPROPERTY(Category = Camera, EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"));
 	class UCameraComponent* Camera;
+
+	/*Weapon*/
+	UPROPERTY(Category = Weapon, EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"));
+	class UStaticMeshComponent* WeaponBase;
+	/*Muzzle*/
+	UPROPERTY(Category = Weapon, BlueprintReadWrite, EditAnywhere, meta = (AllowPrivateAccess = "true"));
+	class USphereComponent* Muzzle;
 };

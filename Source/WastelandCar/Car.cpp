@@ -2,9 +2,11 @@
 
 #include "Car.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Components/InputComponent.h"
+#include "Components/StaticMeshComponent.h"
+#include "Components/SphereComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
-#include "Components/InputComponent.h"
 #include "WheeledVehicleMovementComponent4W.h"
 
 static const FName NAME_SteerInput("Steer");
@@ -50,6 +52,15 @@ ACar::ACar() {
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("ChaseCamera"));
 	Camera->SetupAttachment(SpringArm, USpringArmComponent::SocketName);
 	Camera->FieldOfView = 90.0f;
+
+	//Creating A WeaponBase
+	WeaponBase = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WeaponBase"));
+	WeaponBase->SetupAttachment(RootComponent);
+	WeaponBase->SetMobility(EComponentMobility::Movable);
+
+	//Creating a Muzzle Component
+	Muzzle = CreateDefaultSubobject<USphereComponent>(TEXT("Muzzle"));
+	Muzzle->SetupAttachment(WeaponBase);
 }
 
 void ACar::Tick(float DeltaTime) {
@@ -85,6 +96,7 @@ void ACar::LookUp(float Val) {
 }
 
 void ACar::Turn(float Val) {
+	;
 	if (Val != 0.f) {
 		AddControllerYawInput(Val);
 	}
@@ -99,4 +111,7 @@ void ACar::OnHandbrakeReleased() {
 }
 
 void ACar::UpdateInAirControl(float DeltaTime) {
+}
+
+void ACar::Fire() {
 }
