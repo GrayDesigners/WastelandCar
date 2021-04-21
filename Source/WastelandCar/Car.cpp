@@ -16,10 +16,10 @@ ACar::ACar() {
 	UWheeledVehicleMovementComponent4W* Vehicle4W = CastChecked < UWheeledVehicleMovementComponent4W>(GetVehicleMovement());
 
 	//Adjusting the tire loading
-	Vehicle4W->MinNormalizedTireLoad = 0.0f;
-	Vehicle4W->MinNormalizedTireLoadFiltered = 0.2f;
-	Vehicle4W->MaxNormalizedTireLoad = 2.0f;
-	Vehicle4W->MaxNormalizedTireLoadFiltered = 2.0f;
+	Vehicle4W->MinNormalizedTireLoad = 1.0f;
+	Vehicle4W->MinNormalizedTireLoadFiltered = 1.0f;
+	Vehicle4W->MaxNormalizedTireLoad = 3.0f;
+	Vehicle4W->MaxNormalizedTireLoadFiltered = 3.0f;
 
 	//Torque setup
 	Vehicle4W->MaxEngineRPM = 5700.0f;
