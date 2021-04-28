@@ -112,6 +112,7 @@ void ACar::OnHandbrakeReleased() {
 }
 
 void ACar::UpdateInAirControl(float DeltaTime) {
+	/*
 	if (UWheeledVehicleMovementComponent4W* Vehicle4W = CastChecked<UWheeledVehicleMovementComponent4W>(GetVehicleMovement())) {
 		FCollisionQueryParams QueryParams;
 		QueryParams.AddIgnoredActor(this);
@@ -140,4 +141,5 @@ void ACar::UpdateInAirControl(float DeltaTime) {
 			}
 		}
 	}
+	*/
 }
