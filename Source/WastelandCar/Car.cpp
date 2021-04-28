@@ -16,17 +16,18 @@ ACar::ACar() {
 	UWheeledVehicleMovementComponent4W* Vehicle4W = CastChecked < UWheeledVehicleMovementComponent4W>(GetVehicleMovement());
 
 	//Adjusting the tire loading
-	Vehicle4W->MinNormalizedTireLoad = 0.0f;
-	Vehicle4W->MinNormalizedTireLoadFiltered = 0.2f;
-	Vehicle4W->MaxNormalizedTireLoad = 2.0f;
-	Vehicle4W->MaxNormalizedTireLoadFiltered = 2.0f;
+	Vehicle4W->MinNormalizedTireLoad = 1.f;
+	Vehicle4W->MinNormalizedTireLoadFiltered = 1.f;
+	Vehicle4W->MaxNormalizedTireLoad = 5.f;
+	Vehicle4W->MaxNormalizedTireLoadFiltered = 5.f;
 
 	//Torque setup
-	Vehicle4W->MaxEngineRPM = 5700.0f;
+	Vehicle4W->MaxEngineRPM = 14000.0f;
 	Vehicle4W->EngineSetup.TorqueCurve.GetRichCurve()->Reset();
-	Vehicle4W->EngineSetup.TorqueCurve.GetRichCurve()->AddKey(0.0f, 400.0f);
-	Vehicle4W->EngineSetup.TorqueCurve.GetRichCurve()->AddKey(1890.0f, 500.0f);
-	Vehicle4W->EngineSetup.TorqueCurve.GetRichCurve()->AddKey(5730.0f, 400.0f);
+	Vehicle4W->EngineSetup.TorqueCurve.GetRichCurve()->AddKey(0.0f, 1400.0f);
+	Vehicle4W->EngineSetup.TorqueCurve.GetRichCurve()->AddKey(1890.0f, 1200.0f);
+	Vehicle4W->EngineSetup.TorqueCurve.GetRichCurve()->AddKey(5730.0f, 1000.0f);
+	Vehicle4W->EngineSetup.TorqueCurve.GetRichCurve()->AddKey(9730.0f, 700.0f);
 
 	//Adjust the steering
 	Vehicle4W->SteeringCurve.GetRichCurve()->Reset();
