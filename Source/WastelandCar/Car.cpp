@@ -16,10 +16,10 @@ ACar::ACar() {
 	UWheeledVehicleMovementComponent4W* Vehicle4W = CastChecked < UWheeledVehicleMovementComponent4W>(GetVehicleMovement());
 
 	//Adjusting the tire loading
-	Vehicle4W->MinNormalizedTireLoad = 1.0f;
-	Vehicle4W->MinNormalizedTireLoadFiltered = 1.0f;
-	Vehicle4W->MaxNormalizedTireLoad = 3.0f;
-	Vehicle4W->MaxNormalizedTireLoadFiltered = 3.0f;
+	Vehicle4W->MinNormalizedTireLoad = 0.0f;
+	Vehicle4W->MinNormalizedTireLoadFiltered = 0.2f;
+	Vehicle4W->MaxNormalizedTireLoad = 2.0f;
+	Vehicle4W->MaxNormalizedTireLoadFiltered = 2.0f;
 
 	//Torque setup
 	Vehicle4W->MaxEngineRPM = 5700.0f;
@@ -111,7 +111,32 @@ void ACar::OnHandbrakeReleased() {
 }
 
 void ACar::UpdateInAirControl(float DeltaTime) {
-}
+	if (UWheeledVehicleMovementComponent4W* Vehicle4W = CastChecked<UWheeledVehicleMovementComponent4W>(GetVehicleMovement())) {
+		FCollisionQueryParams QueryParams;
+		QueryParams.AddIgnoredActor(this);
 
-void ACar::Fire() {
+		const FVector TraceStart = GetActorLocation() + FVector(0.f, 0.f, 50.f);
+		const FVector TraceEnd = GetActorLocation() + FVector(0.f, 0.f, 200.f);
+
+		FHitResult Hit;
+
+		//check if car is flipped on its side, and check if the car is in air
+
+		const bool bNotGrounded = FVector::DotProduct(GetActorUpVector(), FVector::UpVector) < 0.3f;
+
+		if (bNotGrounded) {
+			const float ForwardInput = InputComponent->GetAxisValue(NAME_ThrottleInput);
+			const float RightInput = InputComponent->GetAxisValue(NAME_SteerInput);
+			//In car is grounded allow player to roll the car over
+			const float AirMovementForcePitch = 3.f;
+			const float AirMovementForceRoll = bNotGrounded ? 20.f : 3.f;
+
+			if (UPrimitiveComponent* VehicleMesh = Vehicle4W->UpdatedPrimitive) {
+				const FVector MovementVector = FVector(RightInput * -AirMovementForceRoll, ForwardInput * AirMovementForcePitch, 0.f)*DeltaTime*25.f;
+				const FVector NewAngularMovement = GetActorRotation().RotateVector(MovementVector);
+
+				VehicleMesh->SetPhysicsAngularVelocity(NewAngularMovement, true);
+			}
+		}
+	}
 }
