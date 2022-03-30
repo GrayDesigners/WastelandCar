@@ -13,3 +13,4 @@ Saved
 *.xcodeproj
 *.xcworkspace
 Config/DefaultEditor.ini
+Source/WastelandCar/Car.cpp
